@@ -16,23 +16,23 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
           <a href="{{ route('product.shoppingCart') }}">
-            <i class="fa fa-shopping-cart" aria-hidden="true"></i> Shopping Cart
+            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
             <div class="badge">{{ Session::has('cart') ? Session::get('cart')->totalQty : '' }}</div>
           </a>
         </li>
+        @if(Auth::check())
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> User Management <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            @if(Auth::check())
-              <li><a href="{{route('user.profile')}}">Profile</a></li> 
-              <li role="separator" class="divider"></li>
-              <li><a href="{{route('user.logout')}}">Logout</a></li>                       
-            @else
-              <li><a href="{{route('user.signup')}}">Signup</a></li>
-              <li><a href="{{route('user.signin')}}">Signin</a></li>
-            @endif
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> {{ Auth::user()->name }} <span class="caret"></span></a>
+          <ul class="dropdown-menu">            
+            <li><a href="{{route('user.profile')}}">Profile</a></li> 
+            <li role="separator" class="divider"></li>
+            <li><a href="{{route('user.logout')}}">Logout</a></li>
           </ul>
         </li>
+        @else
+        <li><a href="{{route('user.signup')}}">Sign Up</a></li>
+        <li><a href="{{route('user.signin')}}">Sign In</a></li>
+        @endif
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
